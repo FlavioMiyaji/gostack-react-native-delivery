@@ -28,6 +28,11 @@ import {
   FoodPricing,
 } from './styles';
 
+interface Params {
+  category_like: number;
+  name_like: string;
+}
+
 interface Food {
   id: number;
   name: string;
@@ -55,25 +60,28 @@ const Dashboard: React.FC = () => {
 
   async function handleNavigate(id: number): Promise<void> {
     // Navigate do ProductDetails page
-    navigation.navigate('FoodDetails', { id });
+    navigation.navigate('FoodDetails', {
+      id,
+    });
   }
 
   useEffect(() => {
     async function loadFoods(): Promise<void> {
       try {
-        const { data } = await api.get<Food[]>('/foods', {
-          params: { category: selectedCategory },
-        });
+        const params = {} as Params;
+        if (searchValue) {
+          params.name_like = searchValue;
+        }
+        if (selectedCategory) {
+          params.category_like = selectedCategory;
+        }
+        const { data } = await api.get<Food[]>('/foods', { params });
         setFoods(
           data.map(
             (food): Food => {
-              const { id, description, price, name, thumbnail_url } = food;
+              const { price } = food;
               return {
-                id,
-                description,
-                price,
-                name,
-                thumbnail_url,
+                ...food,
                 formattedPrice: formatValue(price),
               };
             },
@@ -90,12 +98,9 @@ const Dashboard: React.FC = () => {
   useEffect(() => {
     async function loadCategories(): Promise<void> {
       try {
-        console.log('loadCategories');
-        const { data } = await api.get('/categories');
-        console.log('loadCategories', data);
+        const { data } = await api.get<Category[]>('/categories');
         setCategories(data);
       } catch (err) {
-        console.log(err);
         setCategories([]);
       }
     }

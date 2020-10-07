@@ -37,13 +37,9 @@ const Favorites: React.FC = () => {
         setFavorites(
           data.map(
             (food): Food => {
-              const { id, description, price, name, thumbnail_url } = food;
+              const { price } = food;
               return {
-                id,
-                description,
-                price,
-                name,
-                thumbnail_url,
+                ...food,
                 formattedPrice: formatValue(price),
               };
             },
