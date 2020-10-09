@@ -12,6 +12,4 @@ Com o servidor rodando é possível utilizar o **yarn start** para rodar a aplic
 
 https://github.com/rocketseat-education/bootcamp-gostack-desafios/tree/master/desafio-react-native-delivery
 
-<img src="/assets/screenshots/Screenshot_Home.png" width="250">
-<img src="/assets/screenshots/Screenshot_Dashboard.png" width="250">
-<img src="/assets/screenshots/Screenshot_FoodDetails.png" width="250">
+<img src="/assets/screenshots/Screenshot_Home.png" width="250"> <img src="/assets/screenshots/Screenshot_Dashboard.png" width="250"> <img src="/assets/screenshots/Screenshot_FoodDetails.png" width="250">
